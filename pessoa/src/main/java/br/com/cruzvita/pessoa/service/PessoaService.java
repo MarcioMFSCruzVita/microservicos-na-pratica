@@ -29,9 +29,9 @@ public class PessoaService{
 				.map(p -> modelMapper.map(p, PessoaDto.class));
 	}
 	
-	public PessoaDto obterPorId(Long id) {
-		Pessoa pessoa = repository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException());
+	public PessoaDto obterPorId(String cpf) {
+		Pessoa pessoa = repository.findByCpf(cpf).
+				orElseThrow(() -> new EntityNotFoundException());
 		return modelMapper.map(pessoa, PessoaDto.class);
 	}
 	
@@ -44,14 +44,14 @@ public class PessoaService{
 		return modelMapper.map(pessoa, PessoaDto.class);	
 	}
 	
-	public PessoaDto atualizarPessoa(Long id, PessoaDto dto) {
+	public PessoaDto atualizarPessoa(String cpf, PessoaDto dto) {
 		Pessoa pessoa = modelMapper.map(dto, Pessoa.class);
-		pessoa.setId(id);
+		pessoa.setCpf(cpf);
 		pessoa = repository.save(pessoa);		
 		return modelMapper.map(pessoa, PessoaDto.class);	
 	}
 	
-	public void excluirPessoa(Long id) {
-		repository.deleteById(id);
+	public void excluirPessoa(String cpf) {
+		repository.deleteByCpf(cpf);
 	}
 }

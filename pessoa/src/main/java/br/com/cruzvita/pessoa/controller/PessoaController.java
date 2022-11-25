@@ -35,29 +35,29 @@ public class PessoaController {
 		return service.obterTodos(paginacao);
 	}
 	
-	@GetMapping("/{id}")
-	public PessoaDto listarPorId(@PathVariable Long id) {
-		return service.obterPorId(id);
+	@GetMapping("/{cpf}")
+	public PessoaDto listarPorId(@PathVariable String cpf) {
+		return service.obterPorId(cpf);
 	}
 	
 	@PostMapping
 	public ResponseEntity<PessoaDto> cadastrar(@RequestBody @Valid PessoaDto dto, UriComponentsBuilder uriBuilder){
 		PessoaDto pessoa = service.criarPessoa(dto);
-		URI endereco = uriBuilder.path("/pessoa/{id}").buildAndExpand(pessoa.getId()).toUri();
+		URI endereco = uriBuilder.path("/pessoa/{cpf}").buildAndExpand(pessoa.getCpf()).toUri();
 		
 		return ResponseEntity.created(endereco).body(pessoa);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<PessoaDto> atualizarPessoa(@PathVariable @NotNull Long id, @RequestBody @Valid PessoaDto dto){
-		PessoaDto atualizar = service.atualizarPessoa(id, dto);
+	@PutMapping("/{cpf}")
+	public ResponseEntity<PessoaDto> atualizarPessoa(@PathVariable @NotNull String cpf, @RequestBody @Valid PessoaDto dto){
+		PessoaDto atualizar = service.atualizarPessoa(cpf, dto);
 		
 		return ResponseEntity.ok(atualizar);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<PessoaDto> deletarPessoa(@PathVariable @NotNull Long id){
-		service.excluirPessoa(id);
+	@DeleteMapping("/{cpf}")
+	public ResponseEntity<PessoaDto> deletarPessoa(@PathVariable @NotNull String cpf){
+		service.excluirPessoa(cpf);
 		return ResponseEntity.ok(null);
 	}
 	
