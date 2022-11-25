@@ -18,4 +18,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 
 	public void deleteByCpf(String cpf);
 
+	public Pessoa getByCpf(String cpf);
+
 }

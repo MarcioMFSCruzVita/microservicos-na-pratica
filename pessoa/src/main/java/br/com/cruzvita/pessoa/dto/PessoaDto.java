@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class PessoaDto {
 
+	
 	private String nome;
 	
 	private String cpf;
@@ -13,4 +14,6 @@ public class PessoaDto {
 	private String dataNascimento;
 	
 	private Status status;
+	
+	private StatusReq statusReq;
 }

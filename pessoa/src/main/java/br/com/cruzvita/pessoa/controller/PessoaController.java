@@ -57,6 +57,7 @@ public class PessoaController {
 	
 	@DeleteMapping("/{cpf}")
 	public ResponseEntity<PessoaDto> deletarPessoa(@PathVariable @NotNull String cpf){
+		
 		service.excluirPessoa(cpf);
 		return ResponseEntity.ok(null);
 	}
